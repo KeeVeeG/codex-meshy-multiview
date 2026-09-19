@@ -1,6 +1,6 @@
 interface:
   display_name: "Meshy Multi-View"
-  short_description: "Concept to four views, textured 3D, and low-poly remesh"
-  default_prompt: "Use $meshy-multiview to prepare consistent front, left, back, and right views from my concept, generate a textured Meshy model, and create a separate Adaptive Low remesh."
+  short_description: "Concept sheets to textured low-poly 3D"
+  default_prompt: "Use $meshy-multiview to create or interpret a concept sheet, prepare four consistent views of the selected design, and generate a textured Meshy model with an Adaptive Low remesh."
 policy:
   allow_implicit_invocation: true

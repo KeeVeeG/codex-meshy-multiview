@@ -4,6 +4,26 @@ A synthetic concept and four orthographic reference views generated with ImageGe
 
 All reference PNGs are 1254 × 1254. Two targeted corrections per side reduced scale and wheel-position differences; small residual differences remain. These are generated references for an API smoke test, not dimensionally exact engineering drawings.
 
+## Initial concept
+
+This example starts from a single concept image. New ImageGen references default to a concept/reference sheet; an existing or explicitly requested single image remains a supported starting point.
+
+![Utility robot concept](concept.png)
+
+## Four separate Meshy views
+
+| Front | Subject-left |
+| --- | --- |
+| ![Robot front view](front.png) | ![Robot left view](left.png) |
+| **Back** | **Subject-right** |
+| ![Robot back view](back.png) | ![Robot right view](right.png) |
+
+## Resulting model
+
+![Textured Adaptive Low robot model](remesh-preview.png)
+
+## Reproduce the workflow
+
 From the repository root, with your own Meshy credentials configured:
 
 ```sh
@@ -27,5 +47,3 @@ Verified on 2026-09-20 through the installed stdio MCP server using the public t
 | Reported API credits | 30 | 5 |
 
 Both downloaded previews were visually inspected. The result demonstrates the API integration and texture retention; it is not a guarantee of topology or artistic quality for arbitrary subjects. The GLBs remain local rather than being bundled in the repository. No credentials, task IDs, or signed asset URLs are included here.
-
-![Adaptive Low output](remesh-preview.png)

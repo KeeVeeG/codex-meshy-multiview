@@ -4,22 +4,22 @@
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Turn a concept into four consistent reference views, generate a textured 3D model with Meshy, and create a separate **Adaptive / Low** remesh. Includes a Codex skill, an MCP server, and a resumable command-line workflow.
+Turn concept sheets into four consistent reference views, generate a textured 3D model with Meshy, and create a separate **Adaptive / Low** remesh. Includes a Codex skill, an MCP server, and a resumable command-line workflow. Existing single images and finished view sets are also supported.
 
 ```mermaid
 flowchart LR
-    A[Existing concept or ImageGen] --> B[Four separate orthographic views]
+    A[Concept sheet or existing references] --> B[Four separate orthographic views]
     B --> C[Multi-Image to 3D + PBR textures]
     C --> D[Adaptive Low remesh]
     C --> E[Original GLB]
     D --> F[Low-poly GLB + inspection report]
 ```
 
-The image preparation skill works with characters, creatures, props, vehicles, furniture, and other objects. It preserves the source design, selected variant, pose, asymmetry, materials, and camera scale. ImageGen runs through Codex's image-generation tool; this package does not implement a separate image-generation API client.
+The image preparation skill works with characters, creatures, props, vehicles, furniture, and other objects. For new designs, ImageGen creates a **concept sheet by default**, establishing one design across complementary views and useful detail studies. The skill checks the sheet for inconsistencies before preparing the four clean inputs. It also accepts existing references or an explicitly requested single concept image, preserving the selected variant, pose, asymmetry, materials, and camera scale. ImageGen runs through Codex's image-generation tool; this package does not implement a separate image-generation API client.
 
 ## What it does
 
-- Accepts exactly four PNG/JPEG files or public HTTPS image URLs: front, back, left, right.
+- The MCP/CLI generation step accepts exactly four PNG/JPEG files or public HTTPS image URLs: front, back, left, right.
 - Uses `meshy-7.1`, textured generation, PBR maps, and all four views as texture references by default.
 - Runs remesh as a separate task with `topology: triangle` and `decimation_mode: 4`.
 - Saves task IDs, supports resume, and never automatically retries a paid POST.
@@ -28,13 +28,25 @@ The image preparation skill works with characters, creatures, props, vehicles, f
 
 Adaptive Low is a relative level, **not a fixed polygon budget**. Meshy ignores `target_polycount` when adaptive decimation is enabled. GLB inspection verifies metadata and embedded texture bindings, not artistic quality or reference fidelity.
 
-## Verified example
+## Verified examples
+
+### 1. Concept sheet: Survey Pod
+
+| ImageGen concept sheet | Meshy Adaptive Low result |
+| --- | --- |
+| ![Survey Pod concept sheet](examples/survey-pod/concept-sheet.png) | ![Textured remeshed Survey Pod](examples/survey-pod/remesh-preview.png) |
+
+The default workflow starts with a concept sheet, checks agreement between its views and details, and prepares four separate inputs. A live MCP run produced **352,496 → 6,249 triangles**, with embedded base-color textures verified in both GLBs, for 35 reported API credits. See the [complete image sequence and validation](examples/survey-pod/README.md).
+
+### 2. Single concept image: Utility robot
 
 | ImageGen concept | Meshy Adaptive Low result |
 | --- | --- |
 | ![Utility robot concept](examples/utility-robot/concept.png) | ![Textured remeshed robot](examples/utility-robot/remesh-preview.png) |
 
-A live run through the installed MCP server completed generation, remesh, and downloads: **221,954 → 5,865 triangles**, with embedded base-color textures verified in both GLBs. Meshy reported 35 API credits. The [example](examples/utility-robot/README.md) includes all four references and the reproduction command. Counts and generation quality vary between runs.
+A live MCP run using a single concept as the starting reference produced **221,954 → 5,865 triangles**, with embedded base-color textures verified in both GLBs, for 35 reported API credits. See the [complete image sequence and validation](examples/utility-robot/README.md).
+
+Both examples include the initial reference, all four input views, the resulting model preview, and a reproduction command. Counts and generation quality vary between runs; live verification establishes API completion and texture retention, not exact design fidelity.
 
 ## Requirements
 
@@ -85,9 +97,15 @@ Start a new Codex task after installation. The plugin launches the installed run
 
 For a new design:
 
-> Create a stylized stone lantern concept with ImageGen, then prepare matching front, left, back and right views and use Meshy to produce a textured model and an Adaptive Low remesh.
+> Create a concept sheet for a stylized stone lantern with ImageGen. Check that its views and details describe the same design, then prepare matching front, left, back and right images and use Meshy to produce a textured model and an Adaptive Low remesh.
 
-The skill includes a reusable, subject-independent [view-generation prompt](plugins/codex-meshy-multiview/skills/meshy-multiview/references/view-generation.md). See [image preparation](docs/image-preparation.md) for consistency checks and handling variant sheets.
+For a concept sheet only:
+
+> Use the Meshy Multi-View skill to create a concept/reference sheet for a stylized stone lantern. Show the same design from useful angles, with close-ups of its materials and assembly. Prepare the sheet only; do not start Meshy generation.
+
+A concept sheet can contain multiple panels, detail studies, and requested variants. The skill selects one design and variant before preparing the four separate, clean Meshy inputs. A request for concept images or a sheet alone does not start a paid Meshy task.
+
+The skill includes reusable, subject-independent [concept-sheet guidance](plugins/codex-meshy-multiview/skills/meshy-multiview/references/concept-sheets.md) and a [view-generation prompt](plugins/codex-meshy-multiview/skills/meshy-multiview/references/view-generation.md). See [image preparation](docs/image-preparation.md) for source choices and consistency checks.
 
 ## Use from the CLI
 

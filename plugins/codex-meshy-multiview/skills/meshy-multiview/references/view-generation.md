@@ -1,12 +1,12 @@
 # Consistent views for Meshy
 
-Use this reference when the user wants to turn a concept image into four views, generate a new concept and its views, or repair an inconsistent view set. It applies to any subject: creatures, characters, props, vehicles, machines, furniture, or other objects. Do not carry species, anatomy, materials, colors, or accessories from an unrelated example into the new subject.
+Use this reference to derive four views from a concept image, sheet, or multiple references, or repair an inconsistent view set. It applies to any subject. For sheet generation, panel roles, and variant selection, first read [concept-sheets.md](concept-sheets.md). Do not carry design details from an unrelated example into a new subject.
 
 ## Choose the starting point
 
 **Existing concept or reference:** inspect each supplied image. A local file must first be opened with `view_image`. Prefer the user's selected design. If a sheet contains multiple variations, identify the intended variation from the request and visible context. Ask only if the choice remains consequential and unresolved; do not combine alternatives into a new design. Multiple photographs should describe the same object.
 
-**New concept:** use the built-in image generation tool to produce the requested subject and style first. A clear three-quarter concept can help establish volume, but preserve an explicitly requested composition. Inspect the generated concept and record its design before deriving views. Creating a concept is a separate image call, in addition to the four view calls. An additional user approval is not required when the user has already authorized this generation and the design is clear.
+**New concept:** use the built-in image generation tool to create a concept/reference sheet by default, showing one design from complementary angles with useful details. Generate a single-image concept or a turnaround instead only when explicitly requested. A single-image concept is not a prerequisite for making a sheet. Inspect the entire sheet using the checks in [concept-sheets.md](concept-sheets.md), repair consequential contradictions, and record the accepted design before deriving views. This is a separate call from final view generation. An additional user approval is not required when generation is authorized and the design is clear.
 
 **Four finished views:** inspect them together. If they already satisfy the invariants below, use them directly. Do not regenerate good source images merely to follow a fixed sequence.
 
@@ -58,6 +58,9 @@ Input images and roles:
   view set. Match it without copying its camera angle.
 - [Any additional supplied reference: identify its exact role and which
   visible design details it establishes.]
+- [For a sheet: identify the panels for the selected subject/variant,
+  which closeups establish construction, and any excluded alternatives.
+  Sheet labels, borders, scale figures and isolated studies are not model parts.]
 
 Design inventory to preserve:
 - Subject and variant: [SPECIFIC SUBJECT AND VARIANT].
@@ -134,4 +137,4 @@ When a view fails, make a targeted correction that names the mismatch and repeat
 
 Check actual file type, dimensions, and byte size. This plugin accepts local PNG/JPEG files or HTTPS image URLs, with a local cap of 20 MiB per file. The square 2048 × 2048 size is a generation request, not an API guarantee or a reason to fabricate file metadata. If a format or framing correction is needed, use the available image generation/editing workflow within the user's request.
 
-Return four distinct final paths, their view assignments, and the prompt set used. Hand them to `meshy_start_multiview` by the named `front`, `back`, `left`, and `right` arguments; the integration makes front the first Meshy reference. Keep the accepted source concept and these reference images alongside the downloaded original and remeshed models.
+Return four distinct final paths, their view assignments, and the prompt set used. For a reference-images-only request, stop after delivering the files. When model generation is authorized, follow the skill's API sequence, including `meshy_plan_multiview` before `meshy_start_multiview`, using the named `front`, `back`, `left`, and `right` arguments; the integration makes front the first Meshy reference. Keep the accepted source concept and these reference images alongside the downloaded original and remeshed models.
