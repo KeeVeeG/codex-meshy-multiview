@@ -24,7 +24,7 @@ Issues = "https://github.com/KeeVeeG/codex-meshy-multiview/issues"
 packages = ["src/meshy_codex"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/plugins", "/.agents", "/docs", "/tests", "/pyproject.toml", "/uv.lock", "/README.md", "/LICENSE", "/CHANGELOG.md", "/CONTRIBUTING.md", "/SECURITY.md"]
+include = ["/src", "/plugins", "/.agents", "/docs", "/examples", "/tests", "/pyproject.toml", "/uv.lock", "/README.md", "/LICENSE", "/CHANGELOG.md", "/CONTRIBUTING.md", "/SECURITY.md"]
 
 [dependency-groups]
 dev = ["pytest>=8,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "pyyaml>=6,<7"]

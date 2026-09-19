@@ -28,6 +28,14 @@ The image preparation skill works with characters, creatures, props, vehicles, f
 
 Adaptive Low is a relative level, **not a fixed polygon budget**. Meshy ignores `target_polycount` when adaptive decimation is enabled. GLB inspection verifies metadata and embedded texture bindings, not artistic quality or reference fidelity.
 
+## Verified example
+
+| ImageGen concept | Meshy Adaptive Low result |
+| --- | --- |
+| ![Utility robot concept](examples/utility-robot/concept.png) | ![Textured remeshed robot](examples/utility-robot/remesh-preview.png) |
+
+A live run through the installed MCP server completed generation, remesh, and downloads: **221,954 → 5,865 triangles**, with embedded base-color textures verified in both GLBs. Meshy reported 35 API credits. The [example](examples/utility-robot/README.md) includes all four references and the reproduction command. Counts and generation quality vary between runs.
+
 ## Requirements
 
 - [uv](https://docs.astral.sh/uv/getting-started/installation/) on PATH; Python 3.11+ (uv can provision it).
