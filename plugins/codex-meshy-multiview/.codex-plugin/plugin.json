@@ -1,0 +1,37 @@
+{
+  "name": "codex-meshy-multiview",
+  "version": "0.1.0",
+  "description": "Concept-to-3D workflow with consistent views, Meshy textures, and Adaptive Low remeshing.",
+  "author": {
+    "name": "KeeVeeG"
+  },
+  "repository": "https://github.com/KeeVeeG/codex-meshy-multiview",
+  "license": "MIT",
+  "keywords": [
+    "meshy",
+    "codex",
+    "multi-view",
+    "remesh",
+    "imagegen",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Meshy Multi-View for Codex",
+    "shortDescription": "Concept to textured 3D and Adaptive Low remesh",
+    "longDescription": "Prepare four consistent reference views with ImageGen, generate a textured Meshy model, and download a separate Adaptive Low remesh. Includes resumable tasks and local GLB checks.",
+    "developerName": "KeeVeeG",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/KeeVeeG/codex-meshy-multiview",
+    "defaultPrompt": [
+      "Create four views from my concept and generate a textured low-poly model.",
+      "Resume my Meshy workflow and download both models."
+    ],
+    "brandColor": "#15A89A"
+  }
+}

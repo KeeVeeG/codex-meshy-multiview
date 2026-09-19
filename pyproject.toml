@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "codex-meshy-multiview"
+version = "0.1.0"
+description = "Resumable Meshy Multi-View to textured 3D and Adaptive Low remesh tools for Codex"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "KeeVeeG"}]
+dependencies = ["httpx>=0.28,<1", "mcp>=1.20,<2", "filelock>=3.16,<4"]
+
+[project.scripts]
+codex-meshy-multiview = "meshy_codex.cli:main"
+codex-meshy-multiview-mcp = "meshy_codex.server:main"
+
+[project.urls]
+Repository = "https://github.com/KeeVeeG/codex-meshy-multiview"
+Issues = "https://github.com/KeeVeeG/codex-meshy-multiview/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/meshy_codex"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/plugins", "/.agents", "/docs", "/tests", "/pyproject.toml", "/uv.lock", "/README.md", "/LICENSE", "/CHANGELOG.md", "/CONTRIBUTING.md", "/SECURITY.md"]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "pyyaml>=6,<7"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

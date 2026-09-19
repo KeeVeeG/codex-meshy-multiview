@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "meshy": {
+      "command": "uv",
+      "args": [
+        "tool",
+        "run",
+        "--offline",
+        "--from",
+        "codex-meshy-multiview",
+        "codex-meshy-multiview-mcp"
+      ],
+      "startup_timeout_sec": 30,
+      "tool_timeout_sec": 600
+    }
+  }
+}
